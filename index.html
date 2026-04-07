@@ -3,116 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños Saul</title>
+<title>🎉 Saul 22</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #c40000, #ffffff);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: black;
+}
 
-    .container {
-        z-index: 2;
-    }
+/* INTRO */
+.intro {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    background: radial-gradient(circle, #000000, #1a1a1a);
+}
 
-    h1 {
-        color: white;
-        font-size: 2.2rem;
-        text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    }
+.intro h1 {
+    font-size: 2rem;
+    animation: fade 2s infinite alternate;
+}
 
-    button {
-        margin-top: 20px;
-        padding: 15px 25px;
-        font-size: 1.2rem;
-        border: none;
-        border-radius: 10px;
-        background: #ff0000;
-        color: white;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        transition: 0.3s;
-    }
+@keyframes fade {
+    from {opacity: 0.4;}
+    to {opacity: 1;}
+}
 
-    button:hover {
-        transform: scale(1.1);
-        background: #b30000;
-    }
+/* MAIN */
+.main {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, red, white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: 1.5s;
+}
 
-    .gif {
-        position: absolute;
-        width: 80px;
-        animation: float 6s infinite ease-in-out;
-    }
+/* NEON */
+.neon {
+    font-size: 2.5rem;
+    text-align: center;
+    color: white;
+    animation: neon 1.5s infinite alternate;
+}
 
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-50px); }
-        100% { transform: translateY(0px); }
-    }
+@keyframes neon {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px red; }
+    to { text-shadow: 0 0 30px #fff, 0 0 60px red; }
+}
 
-    @keyframes moveAround {
-        0% { top: 10%; left: 10%; }
-        25% { top: 80%; left: 20%; }
-        50% { top: 50%; left: 80%; }
-        75% { top: 20%; left: 60%; }
-        100% { top: 10%; left: 10%; }
-    }
+/* BOTON */
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-    .moving {
-        animation: moveAround 10s infinite linear, float 3s infinite ease-in-out;
-    }
+/* PERSONAJES */
+.character {
+    position: absolute;
+    width: 90px;
+    animation: float 5s infinite ease-in-out;
+}
 
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 1.6rem;
-        }
+@keyframes float {
+    50% { transform: translateY(-50px); }
+}
 
-        button {
-            font-size: 1rem;
-        }
+/* CONFETI */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: fall linear infinite;
+}
 
-        .gif {
-            width: 60px;
-        }
-    }
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>¡Feliz Cumpleaños Saul! 🎉<br>22 años... ¡WOW!</h1>
-    <button onclick="mostrarSorpresa()">¡Pícale para tu sorpresa!</button>
+<div class="intro" onclick="start()">
+    <h1>🎂 ¿Listo para algo épico?</h1>
+    <p>(toca la pantalla)</p>
 </div>
 
-<script>
-function mostrarSorpresa() {
+<div class="main" id="main">
+    <div class="neon">🔥 ¡Feliz Cumpleaños Saul! 🔥<br>22 años... ¡WOW!</div>
+    <button class="btn" onclick="location.reload()">Repetir</button>
+</div>
 
-    const gifs = [
-        "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif", // carro
-        "https://media.giphy.com/media/NOalcASHiOGvC/giphy.gif", // kirby
-        "https://media.giphy.com/media/GRSnxyhJnPsaQy9YLn/giphy.gif", // goku
-        "https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif", // spiderman
-        "https://media.giphy.com/media/12XDYvMJNcmLgQ/giphy.gif" // mario
+<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+<script>
+function start() {
+
+    document.querySelector(".intro").style.display = "none";
+    document.getElementById("main").style.opacity = "1";
+
+    // MUSICA
+    let music = document.getElementById("music");
+    music.play();
+
+    // VOZ
+    let voz = new SpeechSynthesisUtterance("Feliz cumpleaños Saul, que tengas un día increíble");
+    voz.lang = "es-MX";
+    speechSynthesis.speak(voz);
+
+    // PERSONAJES
+    const personajes = [
+        "https://media.giphy.com/media/NOalcASHiOGvC/giphy.gif",
+        "https://media.giphy.com/media/GRSnxyhJnPsaQy9YLn/giphy.gif",
+        "https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif",
+        "https://media.giphy.com/media/12XDYvMJNcmLgQ/giphy.gif"
     ];
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 25; i++) {
         let img = document.createElement("img");
-        img.src = gifs[Math.floor(Math.random() * gifs.length)];
-        img.classList.add("gif", "moving");
+        img.src = personajes[Math.floor(Math.random() * personajes.length)];
+        img.classList.add("character");
 
-        img.style.top = Math.random() * 100 + "%";
-        img.style.left = Math.random() * 100 + "%";
+        img.style.top = Math.random() * 90 + "%";
+        img.style.left = Math.random() * 90 + "%";
 
         document.body.appendChild(img);
+    }
+
+    // CONFETI
+    for (let i = 0; i < 150; i++) {
+        let c = document.createElement("div");
+        c.classList.add("confetti");
+
+        c.style.left = Math.random() * 100 + "%";
+        c.style.background = ["red","white","yellow"][Math.floor(Math.random()*3)];
+        c.style.animationDuration = (Math.random()*3+2)+"s";
+
+        document.body.appendChild(c);
     }
 }
 </script>
